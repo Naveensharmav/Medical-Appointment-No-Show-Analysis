@@ -13,9 +13,9 @@ The analysis focuses on four areas:
 - **SMS and lead time:** How the aggregate reminder comparison changes within lead-time groups.
 - **Neighbourhood:** Where appointment volume and observed no-show rates are comparatively high.
 
-The SQL queries used to inspect and clean the data for this analysis can be found here [link].
+The SQL queries used to inspect and clean the data for this analysis can be found [here](sql/Patient_No_show_analysis.sql).
 
-An interactive Tableau dashboard used to report and explore sales trends can be found here [link].
+An interactive Power BI dashboard for exploring medical appointment no-show patterns can be found [here](powerbi/Patient%20No-show%20Analysis.pbix).
 
 ## Data Structure & Initial Checks
 
