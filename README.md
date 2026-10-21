@@ -37,22 +37,28 @@ The dashboard provides an interactive overview of medical appointment no-show pa
 
 ### 1. Scheduling patterns
 
-**No-show rate by lead time**
+- **No-show rate by lead time**
 
-![No-show rate by lead time](images/No_Show_by_Lead_Time.png)
+<p align="center">
+  <img src="images/No_Show_by_Lead_Time.png" alt="No-show rate by lead time" width="700">
+</p>
 
 Appointments booked further in advance had **higher observed no-show rates**, suggesting that longer lead time may be an important contributor to missed appointments. This pattern points to an opportunity to test whether earlier follow-up or confirmation helps patients keep appointments.
 
-**No-show rate by weekday**
+- **No-show rate by weekday**
 
-![No-show rate by day of week](images/No_Show_%20by_Day_of_Week.png)
+<p align="center">
+  <img src="images/No_Show_%20by_Day_of_Week.png" alt="No-show rate by day of week" width="700">
+</p>
 
 Saturday had the **highest observed no-show rate at 23.08%.** Rates on the other displayed weekdays ranged from **19.35%** to **21.23%**, showing less variation by weekday than by appointment lead time.
 
 ### 2. Age groups and risk tiers
 
-**No-show rate by age group**
+- **No-show rate by age group**
 
+<div align="center">
+  
 | Age group | Appointments | No-shows | No-show rate |
 |---|---:|---:|---:|
 | Teen | 9,374 | 2,433 | 25.95% |
@@ -61,17 +67,31 @@ Saturday had the **highest observed no-show rate at 23.08%.** Rates on the other
 | Adults | 30,072 | 5,656 | 18.81% |
 | Seniors | 21,172 | 3,241 | 15.31% |
 
+</div>
+
 No-show rates were **higher among younger patients: 25.95% for Teens and 23.13% for Young Adults, compared with 15.31% for Seniors.** The clinic could review whether appointment times and rescheduling options work for younger patients, then track no-show rates to see whether more flexible scheduling improves attendance.
 
-**Risk-tier distribution**
+- **Risk-tier distribution**
 
 ![Risk-tier breakdown](images/Risk_Tier_Breakdown.png)
 
 **More than half of appointments (56.37%)** were assigned to **New Patient–Monitor**, while **20.08% were classified as High Risk.** These tiers can help the clinic see where appointments are concentrated and prioritize which groups to review for follow-up planning.
 
+- **Patient risk classification**
+
+Appointments were classified into four risk tiers based on patients’ **prior appointment attendance history** and **appointment lead time**. The classification uses previous no-show patterns to help identify appointments that may warrant additional follow-up. These are rule-based analytical categories, not validated predictions of whether an individual patient will miss an appointment.
+
+<p align="center">
+  <img src="images/Patient-Risk-Classification.png" alt="Patient appointment risk classification" width="700">
+  <br>
+  <sub><em>First rows of the patient appointment risk table, sorted by prior no-show rate (highest first). The full table covers all 110,521 appointments.</em></sub>
+</p>
+
 ### 3. SMS reminders and lead time (SQL analysis)
 
 Across all appointments, the observed no-show rate was **27.57%** (**9,784 of 35,482**) when an SMS was recorded and **16.70%** (**12,530 of 75,039**) when no SMS was recorded. This aggregate comparison does not account for differences in appointment lead time.
+
+<div align="center">
 
 | Lead-time group | Reminder status | Appointments | No-shows | No-show rate |
 |---|---|---:|---:|---:|
@@ -83,13 +103,17 @@ Across all appointments, the observed no-show rate was **27.57%** (**9,784 of 35
 | 1–3 days | SMS received | 906 | 193 | 21.30% |
 | Same day | No SMS received | 38,562 | 1,792 | 4.65% |
 
+</div>
+
 The displayed cross-tabulation totals **110,521 appointments**, matching the cleaned dataset. Overall, appointments with an SMS recorded had a higher no-show rate than those without one. However, within each lead-time group where both SMS statuses were available, appointments with an SMS had lower no-show rates. This difference may be partly related to the SMS group having more appointments booked well in advance, when no-show rates were already higher.
 
 **Scope:** This SMS and lead-time analysis was performed in SQL and is not included in the Power BI dashboard.
 
 ### 4. Neighbourhood results
 
-![Top 15 neighbourhoods by no-show rate](images/No_show_rates_by_Neighbourhoods.png)
+<p align="center">
+  <img src="images/No_show_rates_by_Neighbourhoods.png" alt="Top 15 neighbourhoods by no-show rate" width="700">
+</p>
 
 The highest-ranked neighbourhood in the supplied results was **Santos Dumont**, with **1,276 appointments** and a **28.92%** no-show rate. Neighbourhood rates should be considered alongside appointment volumes. The SQL ranking applied a minimum appointment-count threshold to limit the influence of very small groups.
 
