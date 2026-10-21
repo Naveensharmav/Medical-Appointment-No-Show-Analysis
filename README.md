@@ -13,6 +13,9 @@ The analysis focuses on four areas:
 - **SMS and lead time:** How the aggregate reminder comparison changes within lead-time groups.
 - **Neighbourhood:** Where appointment volume and observed no-show rates are comparatively high.
 
+The SQL queries used to inspect and clean the data for this analysis can be found here [link].
+An interactive Tableau dashboard used to report and explore sales trends can be found here [link].
+
 ## Data Structure & Initial Checks
 
 The source contains **110,527 appointment records**. After cleaning, the analysis set contains **110,521 records**, a reduction of **6**. The appointment-level fields include patient and appointment identifiers, scheduled and appointment dates, age, gender, neighbourhood, health indicators, scholarship status, SMS reminder status, and attendance outcome.
@@ -24,6 +27,10 @@ Cleaning and preparation included **reviewing field names and types**, **standar
 The cleaned dataset has an overall no-show rate of **20.19%** and an average lead time of **10.18 days**. The highest observed lead-time rate was **32.06%** for appointments booked 8 or more days ahead; the same-day rate was **4.65%**. Saturday had the highest no-show rate among the weekdays displayed (**23.08%**), and the Teen age group had the highest rate among the supplied age groups (**25.95%**).
 
 The aggregate SMS comparison was **27.57%** for appointments with an SMS recorded and **16.70%** for those without one. Within each displayed lead-time group that has both reminder statuses, the SMS group had a lower observed rate. This suggests that lead-time mix may contribute to the aggregate difference, but the analysis is observational and does not show that SMS reminders cause attendance outcomes.
+
+The dashboard provides an interactive overview of medical appointment no-show patterns, including key performance indicators, no-show rates by weekday and lead time, neighbourhood comparisons, and patient risk-tier analysis.
+
+![Medical Appointment No-Show Dashboard](images/Dashboard.png)
 
 ## Insights Deep Dive
 
@@ -130,3 +137,4 @@ Project deliverables include the SQL data preparation and analysis, the cleaned 
 - Group-level rates should not be treated as explanations of an individual patient's behavior or as a basis for restricting care.
 
 **Author:** Naveen Sharma
+
