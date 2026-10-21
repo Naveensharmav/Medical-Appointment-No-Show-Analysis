@@ -92,7 +92,7 @@ Across all appointments, the observed no-show rate was **27.57%** (**9,784 of 35
 | 1–3 days | SMS received | 906 | 193 | 21.30% |
 | Same day | No SMS received | 38,562 | 1,792 | 4.65% |
 
-The displayed cross-tabulation totals **110,521 appointments**, matching the cleaned dataset. Within the three lead-time groups where both reminder statuses are shown, the SMS group has the lower observed no-show rate. Long-lead appointments also have the highest no-show rates overall and make up a substantial share of the SMS group. This pattern is consistent with lead-time mix contributing to the aggregate difference; it does not prove that SMS reminders reduce no-shows. The same-day row shown has no SMS comparison.
+The displayed cross-tabulation totals **110,521 appointments**, matching the cleaned dataset. Overall, appointments with an SMS recorded had a higher no-show rate than those without one. However, within each lead-time group where both SMS statuses were available, appointments with an SMS had lower no-show rates. This difference may be partly related to the SMS group having more appointments booked well in advance, when no-show rates were already higher.
 
 **Scope:** This SMS and lead-time analysis was performed in SQL and is not included in the Power BI dashboard.
 
