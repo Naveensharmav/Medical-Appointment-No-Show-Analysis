@@ -14,6 +14,7 @@ The analysis focuses on four areas:
 - **Neighbourhood:** Where appointment volume and observed no-show rates are comparatively high.
 
 The SQL queries used to inspect and clean the data for this analysis can be found here [link].
+
 An interactive Tableau dashboard used to report and explore sales trends can be found here [link].
 
 ## Data Structure & Initial Checks
@@ -38,25 +39,13 @@ The dashboard provides an interactive overview of medical appointment no-show pa
 
 **No-show rate by lead time**
 
-| Time between scheduling and appointment | No-show rate |
-|---|---:|
-| 8+ days | 32.06% |
-| 4–7 days | 25.20% |
-| 1–3 days | 22.89% |
-| Same day | 4.65% |
+![No-show rate by lead time](images/No_Show_by_Lead_Time.png)
 
 Appointments booked further in advance had **higher observed no-show rates**, suggesting that longer lead time may be an important contributor to missed appointments. This pattern points to an opportunity to test whether earlier follow-up or confirmation helps patients keep appointments.
 
 **No-show rate by weekday**
 
-| Day | No-show rate |
-|---|---:|
-| Saturday | 23.08% |
-| Friday | 21.23% |
-| Monday | 20.64% |
-| Tuesday | 20.09% |
-| Wednesday | 19.69% |
-| Thursday | 19.35% |
+![No-show rate by day of week](images/No_Show_%20by_Day_of_Week.png)
 
 Saturday had the **highest observed no-show rate at 23.08%.** Rates on the other displayed weekdays ranged from **19.35%** to **21.23%**, showing less variation by weekday than by appointment lead time.
 
@@ -76,12 +65,7 @@ No-show rates were **higher among younger patients: 25.95% for Teens and 23.13% 
 
 **Risk-tier distribution**
 
-| Rule-based tier | Share of appointments |
-|---|---:|
-| High Risk | 20.08% |
-| Medium Risk | 8.01% |
-| Low Risk | 15.54% |
-| New Patient – Monitor | 56.37% |
+![Risk-tier breakdown](images/Risk_Tier_Breakdown.png)
 
 **More than half of appointments (56.37%)** were assigned to **New Patient–Monitor**, while **20.08% were classified as High Risk.** These tiers can help the clinic see where appointments are concentrated and prioritize which groups to review for follow-up planning.
 
@@ -104,6 +88,8 @@ The displayed cross-tabulation totals **110,521 appointments**, matching the cle
 **Scope:** This SMS and lead-time analysis was performed in SQL and is not included in the Power BI dashboard.
 
 ### 4. Neighbourhood results
+
+![Top 15 neighbourhoods by no-show rate](images/No_show_rates_by_Neighbourhoods.png)
 
 The highest-ranked neighbourhood in the supplied results was **Santos Dumont**, with **1,276 appointments** and a **28.92%** no-show rate. Neighbourhood rates should be considered alongside appointment volumes. The SQL ranking applied a minimum appointment-count threshold to limit the influence of very small groups.
 
