@@ -1,5 +1,5 @@
 /* =====================================================================
-   Script:    01_load_appointments.sql
+   Script:    Patient_No_show_analysis.sql
    Project:   Healthcare Analysis (Medical Appointment No-Shows)
    Dataset:   KaggleV2-May-2016.csv (110,527 rows, 14 columns)
    Database:  healthcare_analysis (MySQL 9.7.1, MySQL Workbench on macOS)
@@ -52,8 +52,6 @@ USE healthcare_analysis;
 
 /* ---------------------------------------------------------------------
    STEP 2: Create the table
-   WARNING: DROP TABLE deletes the existing table and all its data.
-   It makes this script safe to re-run from scratch.
 
    Column notes:
    - PatientId is VARCHAR because it is an identifier, not a number
@@ -94,8 +92,8 @@ CREATE TABLE appointments (
                              matched as text, so no timezone shift is
                              applied.
    --------------------------------------------------------------------- */
-LOAD DATA LOCAL INFILE '/Users/naveensharma/Downloads/KaggleV2-May-2016.csv'
-INTO TABLE appointments
+LOAD DATA LOCAL INFILE '/path/to/KaggleV2-May-2016.csv'
+INTO TABLE medical_appointments
 CHARACTER SET utf8mb4
 FIELDS TERMINATED BY ','
 IGNORE 1 LINES
@@ -104,11 +102,10 @@ IGNORE 1 LINES
 SET ScheduledDay   = STR_TO_DATE(@sched, '%Y-%m-%dT%H:%i:%sZ'),
     AppointmentDay = STR_TO_DATE(@appt,  '%Y-%m-%dT%H:%i:%sZ');
 
-# Rename the table from appointments TO medical_appointments;
-RENAME TABLE appointments TO medical_appointments;
 
 /* ---------------------------------------------------------------------
-   STEP 4: Verify the load
+   STEP 4: DATA QUALITY CHECK
+   
    Expected: 110527 rows, no NULL dates, 'No-show' has only Yes / No,
    and accented neighbourhood names display correctly.
    --------------------------------------------------------------------- */
@@ -119,6 +116,15 @@ FROM medical_appointments
 WHERE ScheduledDay IS NULL OR AppointmentDay IS NULL;
 
 SELECT DISTINCT `No-show` FROM medical_appointments;
+
+SELECT
+    COUNT(*) AS total_rows,
+    COUNT(DISTINCT AppointmentID) AS unique_appointments,
+    SUM(Age < 0) AS negative_age_records,
+    SUM(lead_time_days < 0) AS negative_lead_time_records,
+    SUM(ScheduledDay IS NULL) AS null_scheduled_dates,
+    SUM(AppointmentDay IS NULL) AS null_appointment_dates
+FROM medical_appointments;
 
 SELECT * FROM medical_appointments
 LIMIT 10;
@@ -183,9 +189,10 @@ WHERE lead_time_days < 0;
 
 DELETE FROM medical_appointments
 WHERE lead_time_days < 0;
+
+SET SQL_SAFE_UPDATES = 1;
 -- Data Quality Check: Identified 5 records with negative lead times out of 110,527 records (0.0045%). 
 -- These records will be excluded from the analysis due to their negligible proportion. 
--- The original dataset is preserved.
 
 SELECT * FROM medical_appointments LIMIT 10;
 
@@ -232,8 +239,8 @@ SELECT
         WHEN lead_time_days >= 8 THEN "Long lead (8+ days)"
 	END AS lead_time_segments,
     COUNT(*) AS total_appointments,
-    SUM(CASE WHEN no_show = 'YES' THEN 1 ELSE 0 END) AS no_show_count,
-    ROUND(SUM(CASE WHEN no_show = 'YES' THEN 1 ELSE 0 END) * 100/ COUNT(*), 2) AS no_show_rate
+    SUM(CASE WHEN no_show = 'Yes' THEN 1 ELSE 0 END) AS no_show_count,
+    ROUND(SUM(CASE WHEN no_show = 'Yes' THEN 1 ELSE 0 END) * 100/ COUNT(*), 2) AS no_show_rate
 FROM medical_appointments 
 GROUP BY lead_time_segments
 ORDER BY no_show_rate DESC;
@@ -318,7 +325,7 @@ HAVING COUNT(*) >= 100
 ORDER BY no_show_rate DESC
 LIMIT 15;
 
--- Patient-level risk scoring
+-- 7. Patient-level risk scoring
 SELECT
 	PatientId,
     AppointmentID,
@@ -333,11 +340,10 @@ SELECT
         ORDER BY AppointmentDay
         ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING) AS prior_no_shows
 FROM medical_appointments
-WHERE AppointmentID = 5751990
 ORDER BY PatientId ASC, AppointmentDay ASC;
 
 
--- Apointment risk-based classification
+-- 8. Apointment risk-based classification
 CREATE VIEW v_appoitment_risk AS
 WITH patient_history AS(
 	SELECT 
@@ -393,14 +399,3 @@ not industry-standard criteria or a validated predictive model.
 The goal is to identify appointments that may be at higher risk of a no-show
 and support further analysis of appointment attendance patterns.
 */
-
--- Final data quality summary
-
-SELECT
-    COUNT(*) AS total_rows,
-    COUNT(DISTINCT AppointmentID) AS unique_appointments,
-    SUM(Age < 0) AS negative_age_records,
-    SUM(lead_time_days < 0) AS negative_lead_time_records,
-    SUM(ScheduledDay IS NULL) AS null_scheduled_dates,
-    SUM(AppointmentDay IS NULL) AS null_appointment_dates
-FROM medical_appointments;
