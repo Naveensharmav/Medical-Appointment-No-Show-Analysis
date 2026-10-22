@@ -15,7 +15,7 @@ The analysis focuses on four areas:
 
 The SQL queries used to inspect and clean the data for this analysis can be found [here](sql/Patient_No_show_analysis.sql).
 
-An interactive Power BI dashboard for exploring medical appointment no-show patterns can be found [here](powerbi/Patient%20No-show%20Analysis.pbix).
+An interactive Power BI dashboard for exploring medical appointment no-show patterns can be found [here](powerbi/Patient_No-show%20Analysis.pbix).
 
 ## Data Structure & Initial Checks
 
