@@ -145,7 +145,3 @@ Project deliverables include the SQL data preparation and analysis, the cleaned 
 - SMS status may be associated with other appointment characteristics, including lead time. The comparisons do not prove reminder effectiveness.
 - The risk tiers are rule-based analytical categories, not validated clinical predictions or a machine-learning model.
 - Group-level rates should not be treated as explanations of an individual patient's behavior or as a basis for restricting care.
-
-## Acknowledgements
-
-I would like to thank **Informessor** for his tutorial and guidance, which helped me understand aspects of the data analytics project workflow. I used these learning resources as a reference while developing this project, but the analysis, SQL queries, data visualizations, and Power BI dashboard presented here reflect my own implementation and design decisions.
