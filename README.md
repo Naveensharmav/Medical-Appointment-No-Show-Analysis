@@ -31,7 +31,7 @@ The aggregate SMS comparison was **27.57%** for appointments with an SMS recorde
 
 The dashboard provides an interactive overview of medical appointment no-show patterns, including key performance indicators, no-show rates by weekday and lead time, neighbourhood comparisons, and patient risk-tier analysis.
 
-![Medical Appointment No-Show Dashboard](images/Dashboard.png)
+![Medical Appointment No-Show Dashboard](images/Appointments-Dashboard.png)
 
 ## Insights Deep Dive
 
