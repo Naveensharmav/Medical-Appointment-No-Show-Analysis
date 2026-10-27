@@ -8,11 +8,6 @@
               into it, keeping accented characters (e.g. REPÚBLICA,
               SÃO PEDRO) intact.
 
-   Note on AI assistance:
-   I wrote this script with help from Claude (Anthropic's AI
-   assistant). I used Claude to diagnose the import problem and draft
-   the table definition and LOAD DATA statement. I then ran it and
-   checked the results against my own data.
 
    WHY LOAD DATA INSTEAD OF THE IMPORT WIZARD:
    Workbench's Table Data Import wizard failed on my Mac with:
